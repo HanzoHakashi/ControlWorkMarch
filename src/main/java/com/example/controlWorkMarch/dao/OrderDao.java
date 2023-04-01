@@ -1,8 +1,7 @@
 package com.example.controlWorkMarch.dao;
 
-import com.example.controlWorkMarch.entity.Food;
+
 import com.example.controlWorkMarch.entity.Order;
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.List;
-import java.util.Optional;
+
 
 @Component
 public class OrderDao extends BaseDao {
@@ -33,8 +32,7 @@ public class OrderDao extends BaseDao {
     }
 
     public List<Order> getOrders(Long client_id){
-        String sql = "select * from orders" +
-                "where client = ?";
+        String sql = "select * from orders where client = ?";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Order.class),client_id);
     }
 
@@ -48,5 +46,10 @@ public class OrderDao extends BaseDao {
             ps.setDate(3, Date.valueOf(order.getDateOfOrder()));
             return ps;
         });
+    }
+
+    public void deleteAll() {
+        String sql = "delete from orders";
+        jdbcTemplate.update(sql);
     }
 }
