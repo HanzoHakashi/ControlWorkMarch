@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +43,7 @@ public class MainService {
         order.setClient(client_id);
         order.setOrderedFood(food);
         order.setDateOfOrder(LocalDate.now());
+        order.setTimeOfOrder(LocalTime.now().withSecond(0));
         orderDao.addOrder(order);
     }
 

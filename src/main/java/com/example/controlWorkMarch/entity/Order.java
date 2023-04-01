@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @Builder
@@ -16,4 +18,5 @@ public class Order {
     private Long client; // FK
     private Long orderedFood; //FK
     private LocalDate dateOfOrder;
+    private LocalTime timeOfOrder;
 }

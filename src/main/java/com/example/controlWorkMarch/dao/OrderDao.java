@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -27,7 +30,8 @@ public class OrderDao extends BaseDao {
                 "    foreign key (client) references clients (id),\n" +
                 "    orderedFood  bigserial not null,\n" +
                 "    foreign key (orderedFood) references foods (id),\n" +
-                "    dateOfOrder  Date not null\n" +
+                "    dateOfOrder  Date not null,\n" +
+                "    timeOfOrder TIME not null\n" +
                 ");");
     }
 
@@ -37,13 +41,14 @@ public class OrderDao extends BaseDao {
     }
 
     public void addOrder(Order order){
-        String sql = "insert into orders(client,orderedFood,dateOfOrder)"+
-                "values(?,?,?)";
+        String sql = "insert into orders(client,orderedFood,dateOfOrder,timeOfOrder)"+
+                "values(?,?,?,?)";
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1,order.getClient());
             ps.setLong(2,order.getOrderedFood());
             ps.setDate(3, Date.valueOf(order.getDateOfOrder()));
+            ps.setObject(4, LocalTime.parse(order.getTimeOfOrder().format(DateTimeFormatter.ofPattern("HH.mm")),DateTimeFormatter.ofPattern("HH.mm")) );
             return ps;
         });
     }
