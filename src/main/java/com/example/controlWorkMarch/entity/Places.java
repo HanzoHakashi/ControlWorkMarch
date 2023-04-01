@@ -1,5 +1,6 @@
 package com.example.controlWorkMarch.entity;
 
+import com.example.controlWorkMarch.dto.PlaceDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -32,10 +32,10 @@ public class OrderDao extends BaseDao {
                 ");");
     }
 
-    public List<Food> getOrders(Long client_id){
+    public List<Order> getOrders(Long client_id){
         String sql = "select * from orders" +
                 "where client = ?";
-        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Food.class),client_id);
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Order.class),client_id);
     }
 
     public void addOrder(Order order){
