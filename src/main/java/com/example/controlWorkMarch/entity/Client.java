@@ -13,4 +13,7 @@ public class Client {
     private Long id;
     private String name;
     private String email;
+    private String password;
+    private String role;
+    private Boolean enabled = Boolean.TRUE;
 }

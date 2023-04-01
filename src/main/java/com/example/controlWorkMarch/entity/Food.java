@@ -13,5 +13,6 @@ public class Food {
     private Long id;
     private String nameOfFood;
     private String typeOfFood;
+    private Long place;//FK
     private int price;
 }
